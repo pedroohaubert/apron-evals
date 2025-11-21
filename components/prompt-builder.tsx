@@ -92,7 +92,9 @@ export function PromptBuilder({ templateContent }: PromptBuilderProps) {
 
     const replaceSection = (tag: string, content: string) => {
       const regex = new RegExp(`(<${tag}>)[\\s\\S]*?(<\\/${tag}>)`, "g");
-      finalPrompt = finalPrompt.replace(regex, `$1\n${content}\n$2`);
+      finalPrompt = finalPrompt.replace(regex, (match, startTag, endTag) => {
+        return `${startTag}\n${content}\n${endTag}`;
+      });
     };
 
     replaceSection("TASKCONFIG", formData.taskConfig);
