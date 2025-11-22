@@ -12,6 +12,8 @@ import { NumberPicker } from "@/components/number-picker";
 
 interface PromptBuilderProps {
   templateContent: string;
+  title?: string;
+  description?: string;
 }
 
 interface DimensionRating {
@@ -45,7 +47,7 @@ function formatRatingsTable(ratings: Record<string, DimensionRating>): string {
   ].join("\n");
 }
 
-export function PromptBuilder({ templateContent }: PromptBuilderProps) {
+export function PromptBuilder({ templateContent, title, description }: PromptBuilderProps) {
   const [formData, setFormData] = useState({
     taskConfig: "",
     systemPrompt: "",
@@ -133,9 +135,9 @@ export function PromptBuilder({ templateContent }: PromptBuilderProps) {
     <div className="container mx-auto p-4 max-w-6xl space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>Apron Evals Prompt Builder</CardTitle>
+          <CardTitle>{title ?? "Apron Evals Prompt Builder"}</CardTitle>
           <CardDescription>
-            Fill in the fields below to generate the full prompt.
+            {description ?? "Fill in the fields below to generate the full prompt."}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
